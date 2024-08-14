@@ -146,23 +146,7 @@ app.get('/api/user', async (req, res) => {
   }
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-// VerifyToken pour la vérification de token
-const verifyToken = (req, res, next) => {
-  const token = req.headers['authorization']?.split(' ')[1];
 
-  if (!token) {
-    return res.status(401).json({ message: 'Token non fourni' });
-  }
-
-  jwt.verify(token, SECRET_KEY, (err, decoded) => {
-    if (err) {
-      return res.status(403).json({ message: 'Token invalide' });
-    }
-
-    req.userId = decoded.id;
-    next();
-  });
-};
 // Route pour afficher un utilisateur
 app.get('/api/user/:id', async (req, res) => {
   try {
